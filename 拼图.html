@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拼图游戏</title>
+  <style>
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0;
+      /*font-size: 10px;*/
+    }
+    #changeBtn {
+      display: none;
+      width: 10rem;
+      height: 3rem;
+      line-height: 3rem;
+      border-radius: 5px;
+      text-align: center;
+      background: #2d9708;
+      color: #fff;
+      font-size: 26px;
+      margin-left: 20%;
+      margin-top: 4%;
+    }
+    .info {
+      font-size: 20px;
+      text-align: center;
+    }
+    .modal {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(29, 29, 29, 0.7);
+      z-index: 11;
+      left: 0;
+      top: 0;
+    }
+
+    .tips {
+      width: 60%;
+      height: 200px;
+      border-radius: 5px;
+      font-size: 34px;
+      font-weight: 600;
+      text-align: center;
+      background: #dadada;
+      color: #333;
+      position: fixed;
+      z-index: 22;
+      top: 30%;
+      left: 20%;
+    }
+
+    .success {
+      display: none;
+      width: 60%;
+      height: 250px;
+      border-radius: 5px;
+      font-size: 26px;
+      text-align: center;
+      background: #dadada;
+      color: #333;
+      position: fixed;
+      z-index: 22;
+      top: 30%;
+      left: 30%;
+    }
+
+    h2 {
+      margin: 10px 0;
+      font-size: 26px;
+    }
+
+    #startBtn {
+      width: 60%;
+      height: 70px;
+      line-height: 70px;
+      border-radius: 5px;
+      text-align: center;
+      background: #2d9708;
+      color: #fff;
+      font-size: 26px;
+      margin-left: 20%;
+      margin-top: 4%;
+    }
+
+    #btn {
+      width: 70%;
+      height: 60px;
+      line-height: 60px;
+      font-size: 30px;
+      border-radius: 5px;
+      text-align: center;
+      background: #555555;
+      color: #fff;
+      margin-left: 15%;
+    }
+  </style>
+</head>
+<body>
+<canvas id="game" width="1000" height="600" style="border:#ccc 2px solid"></canvas>
+<p class="info">点击位置互换</p>
+<div id="changeBtn">
+  换一张
+</div>
+<div class="modal">
+  <div class="tips">
+    <p>欢迎进入拼图时间</p>
+    <div id="startBtn">开始游戏</div>
+  </div>
+  <div class="success">
+    <h2>恭喜你，完成通关</h2>
+    <p>哇！你只用了：<span class="times"></span>秒就完成了</p>
+    <div id="btn">再玩一次</div>
+  </div>
+</div>
+
+<script src="easeljs-NEXT.min.js"></script>
+<script src="tweenjs-NEXT.min.js"></script>
+<script></script>
+<script>
+  const PUZZLE_COLUMNS = 5;
+  const PUZZLE_ROWS =3;
+  const PUZZLE_SIZE = 200;
+
+  var stage, startTime = 0, times,ind=0;
+  var pieces = [];
+  var selectedPieces = [];
+  var imgUrl = ['images/img7.jpg','images/img4.jpg','images/img5.jpg','images/img3.jpg','images/img1.jpg','images/img2.jpg','images/img6.jpg'];
+
+  var againBtn = document.getElementById('btn');
+  var startBtn = document.getElementById('startBtn');
+  var changeBtn = document.getElementById('changeBtn');
+  startBtn.onclick = function () {
+    document.getElementsByClassName('modal')[0].style.display = 'none';
+    document.getElementsByClassName('tips')[0].style.display = 'none';
+    times = setInterval(() => {
+      startTime++;
+    }, 1000);
+    init(1);
+  };
+
+  againBtn.onclick = function () {
+    pieces.splice(0);
+    selectedPieces.splice(0);
+    init(1);
+    startTime = 0;
+    document.getElementsByClassName('modal')[0].style.display = 'none';
+    document.getElementsByClassName('success')[0].style.display = 'none';
+  }
+
+  changeBtn.onclick=function () {
+    if(ind>4) {
+      ind = 0;
+    } else {
+      ind++;
+    }
+    pieces.splice(0);
+    selectedPieces.splice(0);
+    init(ind);
+  }
+
+  function init(ind) {
+    stage = new createjs.Stage(document.getElementById('game'));
+    buildPuzzle(ind);//导入图片并分割为大小相等的15小块
+    startGame();
+    setTimeout(shufflePuzzle, 1000);//设定2秒后打乱图片的顺序
+  }
+
+  function buildPuzzle(ind) {
+    var i, piece;
+    var l = PUZZLE_COLUMNS * PUZZLE_ROWS;
+    var col = 0;
+    var row = 0;
+    for (i = 0; i < l; i++) {
+      piece = new createjs.Bitmap(imgUrl[ind]);
+      piece.sourceRect = new createjs.Rectangle(col * PUZZLE_SIZE, row * PUZZLE_SIZE, PUZZLE_SIZE, PUZZLE_SIZE);
+      piece.homePoint = {x: col * PUZZLE_SIZE, y: row * PUZZLE_SIZE};
+      piece.x = piece.homePoint.x;
+      piece.y = piece.homePoint.y;
+      stage.addChild(piece);
+      pieces[i] = piece;
+      col++;
+      if (col === PUZZLE_COLUMNS) {
+        col = 0;
+        row++;
+      }
+    }
+  }//创建小图片块
+
+  function shufflePuzzle() {
+    var i, piece, randomIndex;
+    var col = 0;
+    var row = 0;
+    var p = [];
+    p = p.concat(pieces);
+    var l = p.length;
+    for (i = 0; i < l; i++) {
+      randomIndex = Math.floor(Math.random() * p.length);
+      piece = p[randomIndex];
+      p.splice(randomIndex, 1);
+      console.log(createjs.Tween);
+      createjs.Tween.get(piece).to({x: col * PUZZLE_SIZE, y: row * PUZZLE_SIZE}, 200);
+      piece.addEventListener('click', onPieceClick);
+      col++;
+      if (col === PUZZLE_COLUMNS) {
+        col = 0;
+        row++;
+      }
+    }
+  }//洗牌，打乱顺序
+
+  function onPieceClick(e) {
+    console.log(selectedPieces)
+    if (selectedPieces === 2) {
+      return;
+    }
+    var piece = e.target;
+    var matrix = new createjs.ColorMatrix().adjustColor(15, 10, 100, 180);
+    piece.filters = [new createjs.ColorMatrixFilter(matrix)];
+    piece.cache(0, 0, PUZZLE_SIZE, PUZZLE_SIZE);
+    selectedPieces.push(piece);
+    if (selectedPieces.length === 2) {
+      evalSelectedPieces();
+    }
+  }//点击的图片添加到一个数组中，并且给被点击的图片添加一个滤镜效果特别显示
+
+  function evalSelectedPieces() {
+    var piece1 = selectedPieces[0];
+    var piece2 = selectedPieces[1];
+    createjs.Tween.get(piece1).wait(100).to({x: piece2.x, y: piece2.y}, 200);
+    createjs.Tween.get(piece2).wait(100).to({x: piece1.x, y: piece1.y}, 200).call(function () {
+      setTimeout(evalPuzzle, 100);
+    });
+  }//交换图片的位置，这里使用了TweenJS来创建交换的动画效果
+  function evalPuzzle() {
+    var win = true;
+    var i, piece;
+    selectedPieces[0].uncache();
+    selectedPieces[1].uncache();
+    for (i = 0; i < pieces.length; i++) {
+      piece = pieces[i];
+      if (piece.x != piece.homePoint.x || piece.y != piece.homePoint.y) {
+        win = false;
+        break;
+      }
+    }
+    if (win) {
+      document.getElementsByClassName('times')[0].innerText = startTime;
+      document.getElementsByClassName('success')[0].style.display = 'block';
+      document.getElementsByClassName('modal')[0].style.display = 'block';
+      window.clearInterval(times);
+    }
+    else {
+      selectedPieces = [];
+    }
+  }//判断一下是不是全部图片都到了正确位置
+
+  function startGame() {
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.addEventListener('tick', function () {
+      stage.update();
+    });
+  }//tick函
+</script>
+</body>
+</html>

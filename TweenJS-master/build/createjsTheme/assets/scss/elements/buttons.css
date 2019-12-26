@@ -1,0 +1,70 @@
+/*
+Error: Undefined variable: "$color_gray-dark".
+        on line 36 of buttons.scss
+
+31: 		margin: 1rem;
+32: 		// Type
+33: 		text-align: center;
+34: 	//	DISPLAY
+35: 		// Visual Enhancement
+36: 		background-color: $color_gray-dark;
+37: 		color: $color_gray-lightest;
+38: 		// Type
+39: 	//	PSUEDO Elements & Classes
+40: 		// Elements :: before, after, first-line, first-letter, selection
+41: 		&:first-child {margin-left: 0;}
+
+Backtrace:
+buttons.scss:36
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:402:in `visit_prop'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/stack.rb:135:in `with_frame'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:444:in `map'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/stack.rb:135:in `with_frame'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:161:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:10:in `visit'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/engine.rb:390:in `_render_with_sourcemap'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/engine.rb:308:in `render_with_sourcemap'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:209:in `each'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/plugin.rb:82:in `update_stylesheets'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/exec/sass_scss.rb:51:in `process_result'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/exec/base.rb:52:in `parse'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/lib/sass/exec/base.rb:19:in `parse!'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.6/bin/scss:13:in `<top (required)>'
+C:/Ruby23-x64/bin/scss:22:in `load'
+C:/Ruby23-x64/bin/scss:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$color_gray-dark\".\A         on line 36 of buttons.scss\A \A 31: 		margin: 1rem;\A 32: 		// Type\A 33: 		text-align: center;\A 34: 	//	DISPLAY\A 35: 		// Visual Enhancement\A 36: 		background-color: $color_gray-dark;\A 37: 		color: $color_gray-lightest;\A 38: 		// Type\A 39: 	//	PSUEDO Elements & Classes\A 40: 		// Elements :: before, after, first-line, first-letter, selection\A 41: 		&:first-child {margin-left: 0;}"; }

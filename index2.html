@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>easeljs拖拽</title>
+  <script src="//cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js" charset="utf-8"></script>
+</head>
+<body onload="init();">
+<canvas id="demoCanvas" width="500" height="300"></canvas>
+<script>
+  function init() {
+    var stage = new createjs.Stage("demoCanvas");
+    var circle = new createjs.Shape();
+    var txt = new createjs.Text('1213','20px Times','#333');
+    var bg = new createjs.Bitmap("images/img3.png");
+
+    createjs.Touch.enable(stage); //允许设备触控
+//    创建一个方框，展示图片对应的位置和宽高
+    var rect = new createjs.Rectangle(300,100,300,200);
+    bg.sourceRect= rect;
+
+//
+    var shape = new createjs.Shape();
+    shape.graphics.beginFill('#CCC').drawCircle(0,0,30);
+    shape.x = 250;
+    shape.y = 100;
+    bg.mask=shape;
+
+    //--
+    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+    circle.x = 100;
+    circle.y = 100;
+    txt.text = 'hello world';
+    stage.addChild(circle,txt,bg);
+
+    circle.addEventListener('mousedown',function (e) {
+//      var Mindex = stage.getChildIndex(e.target.parent);
+      e.target.addEventListener('pressmove', function (el) {
+        if(e.stageX!==el.stageX||e.stageY!== el.stageY) {
+          circle.x= el.stageX;
+          circle.y = el.stageY;
+        }
+      }, false);
+      stage.update();
+    });
+
+    txt.addEventListener('mousedown',function (e) {
+//      var Mindex = stage.getChildIndex(e.target.parent);
+      e.target.addEventListener('pressmove', function (el) {
+        if(e.stageX!==el.stageX||e.stageY!== el.stageY) {
+          txt.x= el.stageX;
+          txt.y = el.stageY;
+        }
+      }, false);
+      stage.update();
+    });
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.addEventListener('tick',update);
+
+    //        图片拖动
+
+
+    function update(e) {
+//      shape.x += 1;
+//      if(shape.x > bg.getBounds().width){
+//        shape.x=10;
+//      }
+      stage.update();
+    }
+  }
+</script>
+</body>
+</html>

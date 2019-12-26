@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>easeljs拖拽</title>
+  <script src="//cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js" charset="utf-8"></script>
+</head>
+<body onload="init();">
+<canvas id="demoCanvas" width="500" height="300" style="border:1px solid #ddd"></canvas>
+<script>
+  function init() {
+    var stage = new createjs.Stage("demoCanvas");
+    var circle = new createjs.Shape();
+    var txt = new createjs.Text('1213','20px Times','#333');
+    var bg = new createjs.Bitmap("images/img3.png");
+
+
+
+    var canvas = document.querySelector('#demoCanvas');
+    var stage = new createjs.Stage(canvas);
+    var count = 0;
+    var graphics = new createjs.Graphics().beginFill('#000').drawRect(0, 0, 50, 50);
+    var shape = new createjs.Shape(graphics);
+
+// 将容器shape向右向下移动50，此时注册点也移动到了标准坐标系(50, -50)处
+    shape.x = 100;
+    shape.y = 100;
+// 通过regX再给容器移动到原来的位置，此时“身体“进行了移动，但是注册点并没有移动
+    shape.regX = 50;
+    shape.regY = 50;
+    createjs.Ticker.addEventListener('tick', e => {
+      shape.rotation = 1*count++;
+      stage.update();
+    })
+
+    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+
+    stage.addChild(shape);
+    stage.update();
+  }
+</script>
+</body>
+</html>
